@@ -1,17 +1,19 @@
 # YouTube Downloader 
-#### developed in Python during my online class with [www.CodeAvecJonathan.com](https://codeavecjonathan.com/)
+developed in Python during my online class with [www.CodeAvecJonathan.com](https://codeavecjonathan.com/)
 
-#### Needs the ffmpeg audio/video codecs installed on your system : https://ffmpeg.org/download.html
-FFmpeg is the leading multimedia framework, able to decode, encode, transcode, mux, demux, stream, filter and play pretty much anything that humans and machines have created.
-https://ffmpeg.org/
+---
+Needs the <b>ffmpeg</b> audio/video codecs installed on your system : https://ffmpeg.org/download.html <br>
+FFmpeg is the leading multimedia framework, able to <b>decode, encode, transcode, mux, demux, stream, filter</b> and <b>play</b> pretty much anything that humans and machines have created.
 
-#### and the useful ffmpeg-python module from https://github.com/kkroening/ffmpeg-python
-FFmpeg is extremely powerful, but its command-line interface gets really complicated rather quickly.
-If you're like me and find Python to be powerful and readable, it's easier with ffmpeg-python.
+and the useful <b>ffmpeg-python</b> module from https://github.com/kkroening/ffmpeg-python <br>
+FFmpeg is extremely powerful, but its command-line interface gets really complicated rather quickly, it's easier with ffmpeg-python.
 
+---
 ## Sample 
-'''commandline
+```commandline
 python .\YouTubeDownloader.py
+```
+```commandline
 Video to download : https://www.youtube.com/watch?v=FARAVxy0Z8c
 Title : MISSION: IMPOSSIBLE | Behind the Scenes ( 181223 views )
 
@@ -44,4 +46,4 @@ Downloading 128kbps audio/mp4 (itag:140)... 100 % done !
 ... and the magic appears ...
 
 Here it is :  .\YouTubeDownloader\MISSION IMPOSSIBLE  Behind the Scenes.mp4
-'''
+```
