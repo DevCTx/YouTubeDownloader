@@ -232,54 +232,50 @@ class YouTubeDownloader():
         return stream
 
 
-downloader = YouTubeDownloader()
+if __name__ == '__main__' :
+    downloader = YouTubeDownloader()
 
-url_user = downloader.get_url_from_user(YouTubeDownloader.DEFAULT_URL)       # (YouTubeDownloader.DEFAULT_URL) to test
-downloader.get_youtube_information(url_user)
-print("Title :", downloader.get_title(), "(", downloader.get_views(),"views )")
+    url_user = downloader.get_url_from_user()       # (YouTubeDownloader.DEFAULT_URL) to test
+    downloader.get_youtube_information(url_user)
+    print("Title :", downloader.get_title(), "(", downloader.get_views(),"views )")
 
-downloader.displays_all_kind_of_available_stream()
-choice = downloader.asks_user_choice()
-
-if downloader.set_audio_video_choice(choice) == False:  # Standard choice
-    print("\nSelect the video resolution ...")
-    downloader.displays_audio_video_stream_list()
+    downloader.displays_all_kind_of_available_stream()
     choice = downloader.asks_user_choice()
-    stream = downloader.download_selected_stream(choice)
 
-else:   # Personalized choice
-    print("\nSelect a video resolution ...")
-    downloader.set_video_only()
-    downloader.displays_audio_video_stream_list()
-    choice = downloader.asks_user_choice()
-    stream = downloader.download_selected_stream(choice)
+    if downloader.set_audio_video_choice(choice) == False:  # Standard choice
+        print("\nSelect the video resolution ...")
+        downloader.displays_audio_video_stream_list()
+        choice = downloader.asks_user_choice()
+        stream = downloader.download_selected_stream(choice)
 
-    print("\n.. then an audio rate ...")
-    downloader.set_audio_only()
-    downloader.displays_audio_video_stream_list()
-    choice = downloader.asks_user_choice()
-    audio_stream = downloader.download_selected_stream(choice)
+    else:   # Personalized choice
+        print("\nSelect a video resolution ...")
+        downloader.set_video_only()
+        downloader.displays_audio_video_stream_list()
+        choice = downloader.asks_user_choice()
+        stream = downloader.download_selected_stream(choice)
 
-    print("\n... and the magic appears ...") # and build the new video
-    audio_filename = os.path.join("audio", audio_stream.default_filename)
-    video_filename = os.path.join("video", stream.default_filename)
-    output_filename = stream.default_filename # same on audio_stream
-    # vcodec et acodec = "copy" to directly associated the downloaded video and audio streams
-    ffmpeg.output( ffmpeg.input(audio_filename),
-                   ffmpeg.input(video_filename),
-                   output_filename, vcodec='copy', acodec='copy', loglevel='quiet').run(overwrite_output=True)
+        print("\n.. then an audio rate ...")
+        downloader.set_audio_only()
+        downloader.displays_audio_video_stream_list()
+        choice = downloader.asks_user_choice()
+        audio_stream = downloader.download_selected_stream(choice)
 
-    # delete the temporary files and folders
-    os.remove(audio_filename)
-    os.remove(video_filename)
-    os.rmdir('audio')
-    os.rmdir('video')
+        print("\n... and the magic appears ...") # and build the new video
+        audio_filename = os.path.join("audio", audio_stream.default_filename)
+        video_filename = os.path.join("video", stream.default_filename)
+        output_filename = stream.default_filename # same on audio_stream
+        # vcodec et acodec = "copy" to directly associated the downloaded video and audio streams
+        ffmpeg.output( ffmpeg.input(audio_filename),
+                       ffmpeg.input(video_filename),
+                       output_filename, vcodec='copy', acodec='copy', loglevel='quiet').run(overwrite_output=True)
 
-file_path = os.path.join(os.getcwd(), stream.default_filename)
-print("\nHere it is : ", file_path)
-webbrowser.open(file_path)
+        # delete the temporary files and folders
+        os.remove(audio_filename)
+        os.remove(video_filename)
+        os.rmdir('audio')
+        os.rmdir('video')
 
-
-
-
-
+    file_path = os.path.join(os.getcwd(), stream.default_filename)
+    print("\nHere it is : ", file_path)
+    webbrowser.open(file_path)
